@@ -1,4 +1,4 @@
-package com.example.job.delay.hdfs;
+package com.example.dep;
 
 import java.io.IOException;
 
@@ -8,9 +8,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import com.example.parser.AirLinePerformaceParser;
-import com.example.parser.DelayCounters;
 
-public class HdfsDepartureDelayCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class DepartureDelayCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
 	final IntWritable one = new IntWritable(1);
 
@@ -25,14 +24,10 @@ public class HdfsDepartureDelayCountMapper extends Mapper<LongWritable, Text, Te
 			if (parser.getDepartureDelayTime() > 0) {
 				outputKey.set(parser.getYear() + "");
 				context.write(outputKey, one);
-				context.getCounter(DelayCounters.delay_departure).increment(1);
-			} else if (parser.getDepartureDelayTime() == 0)
-				context.getCounter(DelayCounters.scheduled_departure).increment(1);
-			else
-				context.getCounter(DelayCounters.early_departure).increment(1);
-		} else {
-			context.getCounter(DelayCounters.not_available_departure).increment(1);
+				context.getCounter("XXX", "departure").increment(1);
+			}
 		}
+		context.getCounter("XXX", "total").increment(1);
 	}
 
 }

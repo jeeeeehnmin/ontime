@@ -36,13 +36,7 @@ public class HdfsDepartureDelayJobTest {
 	@Test
 	public void testJob() throws Exception {
 		ToolRunner.printGenericCommandUsage(System.out);
-//		String config="/opt/hadoop2/etc/hadoop/";
-//		String core = config + "core-site.xml";
-//		String hdfs = config + "hdfs-site.xml";
-//		String mapred = config + "mapred-site.xml";
-//		String yarn = config + "yarn-site.xml";
-//		
-//		String[] args = {"-conf", core + "," + hdfs + "," + mapred + "," + yarn};
+
 		ToolRunner.run(conf, job, null);
 	}
 
